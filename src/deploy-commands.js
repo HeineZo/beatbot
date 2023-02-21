@@ -1,6 +1,6 @@
 const { REST, Routes } = require('discord.js');
 const { clientId, token } = require('../config.json');
-const retrieveFiles = require('./utils/utils.js');
+const {retrieveFiles} = require('./utils/utils.js');
 
 const commands = [];
 

@@ -1,6 +1,6 @@
 const { Client, Events, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('../config.json');
-const retrieveFiles = require('./utils/utils.js');
+const {retrieveFiles} = require('./utils/utils.js');
 
 
 // Création du bot
@@ -32,19 +32,32 @@ for (const filePath of retrieveFiles('events')) {
 }
 
 bot.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-    const command = interaction.client.commands.get(interaction.commandName);
+	if (interaction.isChatInputCommand()) {
+		const command = interaction.client.commands.get(interaction.commandName);
 
-	if (!command) {
-		console.error(`La commande ${interaction.commandName} n'existe pas.`);
-		return;
-	}
+		if (!command) {
+			console.error(`La commande ${interaction.commandName} n'existe pas`);
+			return;
+		}
 
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'Ho ho :/', ephemeral: true });
+		try {
+			await command.execute(interaction);
+		} catch (error) {
+			console.error(error);
+		}
+	} else if (interaction.isAutocomplete()) {
+		const command = interaction.client.commands.get(interaction.commandName);
+
+		if (!command) {
+			console.error(`La commande ${interaction.commandName} n'existe pas`);
+			return;
+		}
+
+		try {
+			await command.autocomplete(interaction);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 });
 

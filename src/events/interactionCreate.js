@@ -1,29 +1,42 @@
 const { Events } = require('discord.js');
+const {determinePodium} = require('../utils/utils.js');
 
-module.exports = {
-	name: Events.InteractionCreate,
-	async execute(interaction) {
-		if (!interaction.isStringSelectMenu()) return;
 
-        console.log(interaction.values[0]);
+// module.exports = {
+// 	name: Events.InteractionCreate,
+// 	async execute(interaction) {
+// 		if (!interaction.isAutocomplete()) return;
 
-        switch(interaction.customId) {
-            case 'select':
-                await interaction.followUp({ content: interaction.values[0], components: [] });
-        }
+// 		const focusedOption = interaction.options.getFocused(true);
+// 		let choices = [];
+// 		let popular = true;
 
-		// const command = interaction.client.commands.get(interaction.commandName);
+// 		if (focusedOption.value) {
+// 			await fetch(
+// 				`https://api.deezer.com/search/artist?q=${focusedOption.value}&index=0&limit=5`
+// 			)
+// 				.then((response) => response.json())
+// 				.then((data) => (choices = Object.values(data.data)));
+// 			popular = false;
+// 		} else {
+// 			await fetch(
+// 				`https://api.deezer.com/chart/0/artists?limit=5`
+// 			)
+// 				.then((response) => response.json())
+// 				.then((data) => (choices = Object.values(data.data)));
+// 			popular = true;
+// 		}
 
-		// if (!command) {
-		// 	console.error(`No command matching ${interaction.commandName} was found.`);
-		// 	return;
-		// }
+// 		const filtered = choices.filter((choice) => 
+// 			choice.name.toUpperCase().startsWith(focusedOption.value.toUpperCase())
+// 		);
 
-		// try {
-		// 	await command.execute(interaction);
-		// } catch (error) {
-		// 	console.error(`Error executing ${interaction.commandName}`);
-		// 	console.error(error);
-		// }
-	},
-};
+
+// 		await interaction.respond(
+// 			popular ?
+// 				filtered.map((choice) => ({ name: `${choice.name}`, value: choice.id.toString() }))
+// 				: filtered.map((choice, index) => ({ name: `${determinePodium(index)} ${choice.name} • ${choice.nb_fan} fans`, value: choice.id.toString() }))
+// 		);
+		
+// 	},
+// };

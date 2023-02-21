@@ -1,7 +1,7 @@
 const path = require('node:path');
 const fs = require('node:fs');
 
-function retrieveFiles(folder) {
+exports.retrieveFiles = function(folder) {
 
     // On récupère tous les fichiers .js dans le dossier spécifié
     const commandsPath = path.join(__dirname, `../${folder}`);
@@ -16,4 +16,15 @@ function retrieveFiles(folder) {
     return filesPath;
 }
 
-module.exports = retrieveFiles;
+exports.determinePodium = function(place) {
+    switch (place) {
+        case 0:
+            return '🥇';
+        case 1:
+            return '🥈';
+        case 2:
+            return '🥉';
+        default:
+            return '👻';
+    }
+}
