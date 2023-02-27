@@ -28,3 +28,24 @@ exports.determinePodium = function(place) {
             return '👻';
     }
 }
+
+const retrieveData = async (apiCall) => {
+    let value;
+    await fetch(apiCall)
+        .then((response) => response.json())
+        .then((data) => (value = data));
+    return value;
+}
+
+exports.getArtist = async function(idArtist) {
+    return retrieveData(`https://api.deezer.com/artist/${idArtist}`);
+}
+
+exports.getAlbumFromArtist = async function(idArtist, limit = -1) {
+    let value;
+    await fetch(`https://api.deezer.com/artist/${idArtist}/albums?limit=${limit}`)
+        .then((response) => response.json())
+        .then((data) => (value = data["data"]));
+    return value;
+}
+

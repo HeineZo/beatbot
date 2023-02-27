@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const {determinePodium} = require('../utils/utils.js');
+const {determinePodium, getArtist, getAlbumFromArtist} = require('../utils/utils.js');
 const {confirmArtist} = require('../templates/confirmArtist.embed.js');
 
 module.exports = {
@@ -48,7 +48,10 @@ module.exports = {
 	},
 	async execute(interaction) {
 		let userChoice = interaction.options.getString('artiste');
+		const artist = await getArtist(userChoice);
+		let lastAlbum = await getAlbumFromArtist(userChoice, 1);
 
-		await interaction.reply({embeds: [confirmArtist]});
+
+		await interaction.reply({embeds: [confirmArtist(artist, lastAlbum[0])]});
 	},
 };
