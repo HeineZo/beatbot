@@ -1,12 +1,12 @@
-const { SlashCommandBuilder } = require('discord.js');
-const {determinePodium, getArtist, getAlbumFromArtist} = require('../utils/utils.js');
-const {confirmArtist} = require('../templates/confirmArtist.embed.js');
+import {SlashCommandBuilder} from 'discord.js';
+import {determinePodium, getArtist, getAlbumFromArtist} from '../utils/utils.js';
+import {confirmArtist, confirmButtons} from '../templates/confirmArtist.embed.js';
 
-module.exports = {
+export const command = {
 	data: new SlashCommandBuilder()
 		.setName('alert')
 		.setDescription(
-			"Définis une alerte lorsqu'un artiste choisis sors un nouvel album/titre"
+			"Définis une alerte lorsque l'artiste choisis sors un nouvel album/titre"
 		)
 		.addStringOption((option) =>
 			option
@@ -52,6 +52,14 @@ module.exports = {
 		let lastAlbum = await getAlbumFromArtist(userChoice, 1);
 
 
-		await interaction.reply({embeds: [confirmArtist(artist, lastAlbum[0])]});
+		await interaction.reply({embeds: [confirmArtist(artist, lastAlbum[0])], components: [confirmButtons]});
 	},
+
+	async button(interaction) {
+		if (interaction.customId === 'accept') {
+			await interaction.reply("L'alerte viens d'être ajouté à votre profil ✅");
+		} else if (interaction.customId === 'decline') {
+			await interaction.reply("Mince, on réessaie ? Tapez /alert pour recommencer 🥳");
+		}
+	}
 };

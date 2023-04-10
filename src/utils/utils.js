@@ -1,11 +1,15 @@
-const path = require('node:path');
-const fs = require('node:fs');
+import * as path from 'path';
+import * as fs from 'fs';
+import url from 'url';
 
-exports.retrieveFiles = function(folder) {
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+export function retrieveFiles(folder) {
     // On récupère tous les fichiers .js dans le dossier spécifié
-    const commandsPath = path.join(__dirname, `../${folder}`);
-    const files = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+    const commandsPath = path.join('file://',__dirname, `../${folder}`);
+    
+    const files = fs.readdirSync(path.resolve(__dirname, `../${folder}`)).filter(file => file.endsWith('.js'));
 
     // On crée des chemins d'accès pour chaque fichier
     const filesPath = [];
@@ -16,7 +20,7 @@ exports.retrieveFiles = function(folder) {
     return filesPath;
 }
 
-exports.determinePodium = function(place) {
+export function determinePodium(place) {
     switch (place) {
         case 0:
             return '🥇';
@@ -37,11 +41,11 @@ const retrieveData = async (apiCall) => {
     return value;
 }
 
-exports.getArtist = async function(idArtist) {
+export async function getArtist(idArtist) {
     return retrieveData(`https://api.deezer.com/artist/${idArtist}`);
 }
 
-exports.getAlbumFromArtist = async function(idArtist, limit = -1) {
+export async function getAlbumFromArtist(idArtist, limit = -1) {
     let value;
     await fetch(`https://api.deezer.com/artist/${idArtist}/albums?limit=${limit}`)
         .then((response) => response.json())
@@ -49,3 +53,8 @@ exports.getAlbumFromArtist = async function(idArtist, limit = -1) {
     return value;
 }
 
+export function sendDM(bot, userID, message) {
+    bot.users.fetch(userID).then((user) => {
+        user.send(message);
+    })
+}

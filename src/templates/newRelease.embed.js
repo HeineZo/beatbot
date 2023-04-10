@@ -1,6 +1,6 @@
-import {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from 'discord.js';
+import { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
 
-export function confirmArtist(artist, lastAlbum) {
+function newRelease(artist, lastAlbum) {
 	return new EmbedBuilder()
 		.setColor(0xfbb03b)
 		.setTitle(artist.name)
@@ -20,7 +20,7 @@ export function confirmArtist(artist, lastAlbum) {
 		.setImage(lastAlbum.cover);
 }
 
-export const confirmButtons = new ActionRowBuilder()
+const actionButtons = new ActionRowBuilder()
 	.addComponents(
 		new ButtonBuilder()
 			.setCustomId('accept')
@@ -34,5 +34,4 @@ export const confirmButtons = new ActionRowBuilder()
 			.setStyle(ButtonStyle.Danger)
 	);
 
-
-
+module.exports = { newRelease, actionButtons };
