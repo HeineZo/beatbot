@@ -92,11 +92,11 @@ ChatGPT.
 
 Étant un grand consommateur de rap, j'aime beaucoup écouter les derniers albums qui sortent afin d'être au cœur de l'engouement.\
 Cependant j'ai toujours eu du mal à savoir quand un artiste que j'aimais bien sortait quelque chose.\
-J'ai donc voulu créer un outil permettant à n'importe qui de suivre ses artistes favoris.
+**J'ai donc voulu créer un outil permettant à n'importe qui de suivre ses artistes favoris.**
 
 #### 👉 J'ai trouvé un bug, qu'est-ce que je peux faire ?
 
-Tu peux m'envoyer un message ou directement demander à corriger le bug en suivant installant le bot localement.
+Tu peux m'envoyer un message ou directement demander à corriger le bug en suivant l'installation du bot localement.
 
 > [Voir comment l'installer](#installation-et-utilisation)
 
