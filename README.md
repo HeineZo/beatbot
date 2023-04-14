@@ -98,7 +98,7 @@ Cependant j'ai toujours eu du mal à savoir quand un artiste que j'aimais bien s
 
 Tu peux m'envoyer un message ou directement demander à corriger le bug en suivant l'installation du bot localement.
 
-> [Voir comment l'installer](#installation-et-utilisation)
+> [Voir comment l'installer](https://github.com/HeineZo/beatbot#%EF%B8%8F-installation-et-utilisation)
 
 ## 🔗 Liens utiles
 
