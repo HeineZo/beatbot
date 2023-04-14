@@ -1,5 +1,9 @@
 import {SlashCommandBuilder} from 'discord.js';
 
+/**
+ * Commande qui répète le message de l'utilisateur
+ * @deprecated Va être supprimé
+ */
 export const command = {
 	data: new SlashCommandBuilder()
 		.setName('repeat')

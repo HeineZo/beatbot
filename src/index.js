@@ -1,20 +1,22 @@
 import { Client, Events, Collection, GatewayIntentBits } from 'discord.js';
-import token from '../config.json' assert { type: "json" };
-import {retrieveFiles, sendDM} from './utils/utils.js';
-import {nextFriday} from 'date-fns';
+import token from '../config.json' assert { type: 'json' };
+import { retrieveFiles, sendDM } from './utils/utils.js';
+import { nextFriday } from 'date-fns';
 
 // Création du bot
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// ----------- Liste des commandes du bot
 bot.commands = new Collection();
 
+/**
+ * Liste des commandes du bot
+ */
 for (const filePath of retrieveFiles('commands')) {
 	// Pour chaque fichier, on l'importe
 	let command = await import(filePath);
 	command = command.command;
 
-	// On attribue aux commandes du bot leurs noms et leur fichier
+	// On attribue aux commandes du bot leurs noms et leur fichier respectif
 	if ('data' in command && 'execute' in command) {
 		bot.commands.set(command.data.name, command);
 	} else {
@@ -23,11 +25,10 @@ for (const filePath of retrieveFiles('commands')) {
 		);
 	}
 }
-bot.on('ready', () => {
-	console.log(`${bot.user.tag} est prêt! 🥊`);
-});
 
-// ----------- Liste des évènements du bot
+/**
+ * Liste des événements du bot
+ */
 for (const filePath of retrieveFiles('events')) {
 	const event = import(filePath);
 	if (event.once) {
@@ -44,8 +45,11 @@ for (const filePath of retrieveFiles('events')) {
 // 	);
 // });
 
+/**
+ * Détecter les interactions avec le bot
+ */
 bot.on(Events.InteractionCreate, async (interaction, client) => {
-	// Commande exécutée avec un /
+	// Si la commande est exécutée avec un /
 	if (interaction.isChatInputCommand()) {
 		const command = interaction.client.commands.get(
 			interaction.commandName
@@ -84,9 +88,7 @@ bot.on(Events.InteractionCreate, async (interaction, client) => {
 
 		// Bouton appuyé
 	} else if (interaction.isButton()) {
-		// console.log(interaction.customId)
 		if (interaction.customId === 'accept') {
-			// await interaction.user.send("Hey, vous avez accepté l'alerte !");
 			await interaction.reply(
 				"L'alerte viens d'être ajoutée à votre profil ✅"
 			);
@@ -98,5 +100,10 @@ bot.on(Events.InteractionCreate, async (interaction, client) => {
 	}
 });
 
-// Connexion du bot
+// Connexion du bot avec le token
 bot.login(token.token);
+
+// Lorsque le bot est prêt à être utilisé
+bot.on('ready', () => {
+	console.log(`${bot.user.tag} est prêt! 🥊`);
+});

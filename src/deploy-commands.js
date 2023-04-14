@@ -10,7 +10,7 @@ for (const filePath of retrieveFiles('commands')) {
 	commands.push(command.command.data.toJSON());
 }
 
-// Construct and prepare an instance of the REST module
+// Construct and prepare an instance of the REST module (à lire avec un accent français)
 const rest = new REST({ version: '10' }).setToken(config.token);
 
 // Déploi les commandes

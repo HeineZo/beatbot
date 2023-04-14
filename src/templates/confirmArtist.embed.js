@@ -1,5 +1,10 @@
 import {EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} from 'discord.js';
 
+/**
+ * Embed qui demande la confirmation d'ajouter une alerte pour un artiste
+ * @param artist Artiste dont on veut ajouter une alerte
+ * @param lastAlbum Dernier album de l'artiste
+ */
 export function confirmArtist(artist, lastAlbum) {
 	return new EmbedBuilder()
 		.setColor(0xfbb03b)
@@ -7,8 +12,6 @@ export function confirmArtist(artist, lastAlbum) {
 		.setURL(artist.share)
 		.setThumbnail(artist.picture)
 		.setAuthor({
-			name: `🔔 Nouvelle alerte pour ${artist.name}`,
-			// iconURL: '/img/LetterBig.png',
 		})
 		.setDescription(artist.nb_fan + ' fans')
 

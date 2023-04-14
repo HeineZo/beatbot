@@ -5,6 +5,11 @@ import url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+/**
+ * Récupérer tous les fichiers d'un dossier
+ * @param folder Dossier dont on veut récupérer les fichiers
+ * @returns Les fichiers du dossier
+ */
 export function retrieveFiles(folder) {
     // On récupère tous les fichiers .js dans le dossier spécifié
     const commandsPath = path.join('file://',__dirname, `../${folder}`);
@@ -20,6 +25,11 @@ export function retrieveFiles(folder) {
     return filesPath;
 }
 
+/**
+ * Attribue un emoji en fonction de sa place dans la liste
+ * @param place Index de la liste
+ * @returns Emoji correspondant
+ */
 export function determinePodium(place) {
     switch (place) {
         case 0:
@@ -33,6 +43,11 @@ export function determinePodium(place) {
     }
 }
 
+/**
+ * Récupère les requêtes envoyées à l'API Deezer
+ * @param apiCall Requête à envoyer
+ * @returns Données récupéres
+ */
 const retrieveData = async (apiCall) => {
     let value;
     await fetch(apiCall)
@@ -41,10 +56,21 @@ const retrieveData = async (apiCall) => {
     return value;
 }
 
+/**
+ * Récupère les informations d'un artiste
+ * @param idArtist ID de l'artiste dont on veut récupérer les informations
+ * @returns Les informations de l'artiste
+ */
 export async function getArtist(idArtist) {
     return retrieveData(`https://api.deezer.com/artist/${idArtist}`);
 }
 
+/**
+ * Récupérer les albums d'un artiste
+ * @param idArtist ID de l'artiste
+ * @param limit Limitation du nombre d'albums à récupérer
+ * @returns Les albums de l'artiste
+ */
 export async function getAlbumFromArtist(idArtist, limit = -1) {
     let value;
     await fetch(`https://api.deezer.com/artist/${idArtist}/albums?limit=${limit}`)
@@ -53,6 +79,12 @@ export async function getAlbumFromArtist(idArtist, limit = -1) {
     return value;
 }
 
+/**
+ * Envoi un DM à une personne
+ * @param bot Le bot qui envoi le message
+ * @param userID ID de l'utilisateur qui reçois le message
+ * @param message Contenu du message
+ */
 export function sendDM(bot, userID, message) {
     bot.users.fetch(userID).then((user) => {
         user.send(message);
