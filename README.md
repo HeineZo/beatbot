@@ -6,7 +6,7 @@
 
 Bot discord permettant aux utilisateurs d'être au courant des dernières musiques et albums sortis par leur artiste préféré.
 
-**En détail**
+### En détail
 
 Grâce à la commande `/alert`, l'utilisateur va pouvoir rechercher un artiste grâce au champ de recherche.
 
@@ -29,6 +29,8 @@ Une fois le projet dupliqué, dirigez vous dans le dossier et installez toutes l
 ```
 
 ### Utilisation
+
+---
 
 **⚠️Remarque⚠️**\
 Pour lancer le bot, il vous faudra le `token` de connexion et l'ID du bot. \
@@ -88,9 +90,9 @@ ChatGPT.
 
 #### 👉 D'où vient l'idée ?
 
-Etant un grand consommateur de rap, j'aime beaucoup écouter les derniers albums qui sortent afin d'être au cœur de l'engouement.\
+Étant un grand consommateur de rap, j'aime beaucoup écouter les derniers albums qui sortent afin d'être au cœur de l'engouement.\
 Cependant j'ai toujours eu du mal à savoir quand un artiste que j'aimais bien sortait quelque chose.\
-**C'est comme cela que j'ai eu l'idée.**
+J'ai donc voulu créer un outil permettant à n'importe qui de suivre ses artistes favoris.
 
 #### 👉 J'ai trouvé un bug, qu'est-ce que je peux faire ?
 
