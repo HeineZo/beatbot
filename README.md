@@ -22,7 +22,7 @@ Dupliquez le projet
   git clone https://github.com/HeineZo/beatbot
 ```
 
-Une fois le projet dupliqué, dirigez vous dans le dossier et installez toutes les dépendences.
+Une fois le projet dupliqué, dirigez vous dans le dossier et installez toutes les dépendances.
 
 ```bash
   npm install
@@ -77,7 +77,7 @@ Si vous l'avez déjà build mais que vous avez besoin de le redémarrer, vous po
 
 #### 👉 Le bot est-il fonctionnel ?
 
-Non pas encore, il devrait bientôt être héberger afin de pouvoir être tout le temps disponible et sera accompagné d'une base de données.
+Non pas encore, il devrait bientôt être hébergé afin de pouvoir être tout le temps disponible et sera accompagné d'une base de données.
 
 #### 👉 Est-ce que je peux écouter de la musique avec ?
 
@@ -103,6 +103,6 @@ Tu peux m'envoyer un message ou directement demander à corriger le bug en suiva
 ## 🔗 Liens utiles
 
 <div style="display: flex, justifyContent: space-evenly">
-<a href="https://discordapp.com/users/Enzito#4885"><img src="https://img.shields.io/static/v1?label=Discord&message=Envoi+moi+un+message&color=%237289da&style=for-the-badge&logo=discord&logoColor=white" alt="Discord - Envoi moi un message"></a>
+<a href="https://discordapp.com/users/Enzito#4885"><img src="https://img.shields.io/static/v1?label=Discord&message=Envoie+moi+un+message&color=%237289da&style=for-the-badge&logo=discord&logoColor=white" alt="Discord - Envoie moi un message"></a>
 <a href="https://heinezo.github.io"><img src="https://img.shields.io/badge/mon_portfolio-222?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Discord - Envoi moi un message"></a>
 </div>

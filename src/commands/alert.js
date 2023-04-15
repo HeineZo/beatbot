@@ -7,6 +7,8 @@ import {
 import {
 	confirmArtist,
 	confirmButtons,
+	onConfirmationClick,
+	timeLeftToConfirm,
 } from '../templates/confirmArtist.embed.js';
 
 /**
@@ -50,9 +52,9 @@ export const command = {
 
 		// On filtre les artistes qui correspondent au champ de recherche
 		const filtered = choices.filter((choice) =>
-			choice.name
-				.toUpperCase()
-				.startsWith(focusedOption.value.toUpperCase())
+			choice?.name
+				?.toUpperCase()
+				?.startsWith(focusedOption.value.toUpperCase())
 		);
 
 		// On envoie les choix possibles
@@ -73,26 +75,29 @@ export const command = {
 	},
 	// Si un artiste est choisi, on envoi l'embed de confirmation
 	async execute(interaction) {
+		// Choix de l'utilisateur
 		let userChoice = interaction.options.getString('artiste');
+		// On récupère les informations de l'artiste
 		const artist = await getArtist(userChoice);
+		// On récupère son dernier album
 		let lastAlbum = await getAlbumFromArtist(userChoice, 1);
 
-		await interaction.reply({
-			embeds: [confirmArtist(artist, lastAlbum[0])],
-			components: [confirmButtons],
-		});
-	},
+		// On réactive les boutons (si l'utilisateur a déjà utilisé la commande)
+		confirmButtons.components.forEach((component) =>
+			component.setDisabled(false)
+		);
 
-	// Si l'utilisateur confirme
-	async button(interaction) {
-		if (interaction.customId === 'accept') {
-			await interaction.reply(
-				"L'alerte viens d'être ajouté à votre profil ✅"
-			);
-		} else if (interaction.customId === 'decline') {
-			await interaction.reply(
-				'Mince, on réessaie ? Tapez /alert pour recommencer 🥳'
-			);
-		}
+		// On envoie l'embed de confirmation
+		const confirmEmbed = await interaction.reply({
+			embeds: [confirmArtist(artist, lastAlbum[0], 15)],
+			components: [confirmButtons],
+			ephemeral: true,
+		});
+
+		// On laisse 15s à l'utilisateur pour confirmer son choix
+		timeLeftToConfirm(confirmEmbed, artist, lastAlbum);
+
+		// On écoute les interactions sur les boutons
+		onConfirmationClick(confirmEmbed);
 	},
 };

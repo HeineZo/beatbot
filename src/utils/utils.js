@@ -90,3 +90,14 @@ export function sendDM(bot, userID, message) {
         user.send(message);
     })
 }
+
+/**
+ * Rajoute un s à la fin d'un mot s'il doit être au pluriel
+ * @param word Mot à conjuguer
+ * @param number Chifffre avant le mot
+ * @returns Le mot conjugué
+ */
+export function pluralize(word, number) {
+    return number > 1 ? word + 's' : word;
+}
+

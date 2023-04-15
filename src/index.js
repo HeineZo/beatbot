@@ -86,17 +86,29 @@ bot.on(Events.InteractionCreate, async (interaction, client) => {
 			console.error(error);
 		}
 
-		// Bouton appuyé
-	} else if (interaction.isButton()) {
-		if (interaction.customId === 'accept') {
-			await interaction.reply(
-				"L'alerte viens d'être ajoutée à votre profil ✅"
-			);
-		} else if (interaction.customId === 'decline') {
-			await interaction.reply(
-				'Mince, on réessaie ? Tapez /alert pour recommencer 🥳'
-			);
-		}
+		// Bouton cliqué
+	// } else if (interaction.isButton()) {
+	// 	// Effectuer les actions correspondantes au bouton cliqué
+	// 	if (interaction.customId === 'accept') {
+	// 		await interaction.reply({
+	// 			content: "L'alerte viens d'être ajoutée à votre profil ✅",
+	// 			ephemeral: true,
+	// 		});
+	// 	} else if (interaction.customId === 'decline') {
+	// 		await interaction.reply({
+	// 			content:
+	// 				'Mince, on réessaie ? Tapez /alert pour recommencer 🥳',
+	// 			ephemeral: true,
+	// 		});
+	// 	}
+	// 	interaction.message.delete();
+		// Supprimer le message d'origine
+		// const channel = interaction.channel;
+		// const fetchedMsg = await channel.messages.fetch({
+		// 	around: interaction.message.id,
+		// 	limit: 1,
+		// });
+		// await fetchedMsg.delete();
 	}
 });
 
