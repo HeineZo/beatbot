@@ -12,8 +12,9 @@
   },
   "scripts": {
     "build": "node src/deploy-commands.js & npm run dev",
-    "start": "node src/index.js",
-    "dev": "nodemon --config 'nodemon.json src/index.js'"
+    "start": "nodemon --config 'nodemon.json src/index.js'",
+    "database": "pocketbase serve",
+    "dev": "run-p --race database start"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,8 @@
     "@discordjs/rest": "^1.5.0",
     "date-fns": "^2.29.3",
     "discord-api-types": "^0.37.35",
-    "discord.js": "^14.8.0"
+    "discord.js": "^14.8.0",
+    "npm-run-all": "^4.1.5",
+    "pocketbase": "^0.13.1"
   }
 }
