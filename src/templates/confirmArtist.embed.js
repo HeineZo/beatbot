@@ -7,6 +7,7 @@ import {
 } from 'discord.js';
 
 import { pluralize } from '../utils/utils.js';
+import createAlert from '../database/createAlert.js';
 
 let interval;
 
@@ -65,8 +66,9 @@ export const confirmButtons = new ActionRowBuilder()
 /**
  * Action des boutons
  * @param confirmEmbed Embed de confirmation
+ * @param artist Artiste dont on veut ajouter une alerte
  */
-export const onConfirmationClick = async (confirmEmbed) => {
+export const onConfirmationClick = async (confirmEmbed, artist) => {
 	// Récupérer les actions sur l'embed
 	const collector = confirmEmbed.createMessageComponentCollector({
 		componentType: ComponentType.Button,
@@ -84,10 +86,18 @@ export const onConfirmationClick = async (confirmEmbed) => {
 		clearInterval(interval);
 		// Effectuer les actions correspondantes au bouton cliqué
 		if (buttonInteraction.customId === 'accept') {
-			await buttonInteraction.reply({
-				content: "✅ L'alerte viens d'être ajoutée à ton profil",
-				ephemeral: true,
-			});
+			let success = await createAlert(buttonInteraction, artist);
+			if (success) {
+				await buttonInteraction.reply({
+					content: "✅ L'alerte viens d'être ajoutée à ton profil",
+					ephemeral: true,
+				});
+			} else {
+				await buttonInteraction.reply({
+					content: '❌ Tu as déjà créé une alerte pour cet artiste',
+					ephemeral: true,
+				});
+			}
 		} else if (buttonInteraction.customId === 'decline') {
 			await buttonInteraction.reply({
 				content: '😥 Mince, on réessaie ? Tape /alert pour recommencer',

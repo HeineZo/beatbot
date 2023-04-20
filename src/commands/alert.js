@@ -98,6 +98,6 @@ export const command = {
 		timeLeftToConfirm(confirmEmbed, artist, lastAlbum);
 
 		// On écoute les interactions sur les boutons
-		onConfirmationClick(confirmEmbed);
+		onConfirmationClick(confirmEmbed, artist);
 	},
 };
